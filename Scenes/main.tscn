@@ -1,0 +1,108 @@
+[gd_scene format=3 uid="uid://cpb7xhrs8p6wj"]
+
+[ext_resource type="Script" uid="uid://djag45awav6fo" path="res://Scripts/main.gd" id="1_main"]
+[ext_resource type="Texture2D" uid="uid://nf7xppmm58kh" path="res://Assets/12.png" id="2_jjvhh"]
+[ext_resource type="Script" uid="uid://b0y3xvaba0pns" path="res://Scripts/paddle.gd" id="3_paddle"]
+[ext_resource type="Script" uid="uid://bdb1lng35w02r" path="res://Scripts/hud.gd" id="4_hud"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_left_wall"]
+size = Vector2(40, 900)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_right_wall"]
+size = Vector2(40, 900)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_top_wall"]
+size = Vector2(1232, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_paddle"]
+resource_local_to_scene = true
+size = Vector2(140, 20)
+
+[node name="Main" type="Node2D" unique_id=1219422584]
+script = ExtResource("1_main")
+
+[node name="Background" type="TextureRect" parent="." unique_id=877338822]
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+texture = ExtResource("2_jjvhh")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Walls" type="StaticBody2D" parent="." unique_id=1419302693]
+
+[node name="LeftWall" type="CollisionShape2D" parent="Walls" unique_id=142765515]
+position = Vector2(-20, 324)
+shape = SubResource("RectangleShape2D_left_wall")
+
+[node name="RightWall" type="CollisionShape2D" parent="Walls" unique_id=1123879608]
+position = Vector2(1172, 324)
+shape = SubResource("RectangleShape2D_right_wall")
+
+[node name="TopWall" type="CollisionShape2D" parent="Walls" unique_id=1491999297]
+position = Vector2(576, -20)
+shape = SubResource("RectangleShape2D_top_wall")
+
+[node name="Paddle" type="CharacterBody2D" parent="." unique_id=212112042]
+position = Vector2(576, 600)
+collision_mask = 0
+script = ExtResource("3_paddle")
+
+[node name="Visual" type="ColorRect" parent="Paddle" unique_id=390123177]
+offset_left = -70.0
+offset_top = -10.0
+offset_right = 70.0
+offset_bottom = 10.0
+pivot_offset = Vector2(70, 10)
+mouse_filter = 2
+color = Color(0.8256095, 0.61748344, 0.7627078, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Paddle" unique_id=1591519062]
+shape = SubResource("RectangleShape2D_paddle")
+
+[node name="WideTimer" type="Timer" parent="Paddle" unique_id=1138610131]
+one_shot = true
+
+[node name="Bricks" type="Node2D" parent="." unique_id=78376579]
+
+[node name="Balls" type="Node2D" parent="." unique_id=51202064]
+
+[node name="PowerUps" type="Node2D" parent="." unique_id=606171879]
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1112752181]
+script = ExtResource("4_hud")
+
+[node name="ScoreLabel" type="Label" parent="HUD" unique_id=551446883]
+offset_left = 20.0
+offset_top = 12.0
+offset_right = 320.0
+offset_bottom = 46.0
+theme_override_font_sizes/font_size = 24
+text = "Score: 0"
+
+[node name="LevelLabel" type="Label" parent="HUD" unique_id=2029902993]
+offset_left = 476.0
+offset_top = 12.0
+offset_right = 676.0
+offset_bottom = 46.0
+theme_override_font_sizes/font_size = 24
+text = "Level 1"
+horizontal_alignment = 1
+
+[node name="LivesLabel" type="Label" parent="HUD" unique_id=729454007]
+offset_left = 832.0
+offset_top = 12.0
+offset_right = 1132.0
+offset_bottom = 46.0
+theme_override_font_sizes/font_size = 24
+text = "Lives: 3"
+horizontal_alignment = 2
+
+[node name="MessageLabel" type="Label" parent="HUD" unique_id=1805886347]
+offset_left = 276.0
+offset_top = 330.0
+offset_right = 876.0
+offset_bottom = 470.0
+theme_override_font_sizes/font_size = 32
+text = "Press SPACE to launch"
+horizontal_alignment = 1
